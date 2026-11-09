@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="css/MarkerCluster.Default.css">
         <link rel="stylesheet" href="css/leaflet-search.css">
         <link rel="stylesheet" href="css/leaflet.photon.css">
-        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -24,7 +23,7 @@
             margin: 0;
         }
         </style>
-        <title>Geoportal Miasto 15-Minutowe - Toruń (M. Rozmus)</title>
+        <title>Geoportal Miasto 15-Minutowe - Toruń (Blok 5)</title>
     
         <style>
         .popup15m .leaflet-popup-content { margin: 0; }
@@ -79,6 +78,7 @@
         <script src="js/L.Control.Layers.Tree.min.js"></script>
         <script src="js/L.Control.Locate.min.js"></script>
         <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -87,17 +87,15 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet.photon.js"></script>
-        <script src="js/leaflet-measure.js"></script>
         <script src="js/leaflet.markercluster.js"></script>
         <script src="js/leaflet-search.js"></script>
-        <script src="data/Indeks15minutowysiatka_1.js"></script>
-        <script src="data/Dzielnice_2.js"></script>
-        <script src="data/Granicamiasta_3.js"></script>
-        <script src="data/Zieleirekreacja_4.js"></script>
-        <script src="data/Transportpubliczny_5.js"></script>
-        <script src="data/Handel_6.js"></script>
-        <script src="data/Zdrowie_7.js"></script>
-        <script src="data/Edukacja_8.js"></script>
+        <script src="data/siatka_analiza_15m_1.js"></script>
+        <script src="data/siatka_analiza_15m_post_inwestycja_2.js"></script>
+        <script src="data/izochrony_edukacja_3.js"></script>
+        <script src="data/pustynie_uslugowe_kde_4.js"></script>
+        <script src="data/granica_miasta_5.js"></script>
+        <script src="data/poi_skonsolidowane_6.js"></script>
+        <script src="data/proponowane_nowe_poi_7.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -193,30 +191,10 @@
                 popup._contentNode.classList.remove('media');
             }
         }
-        var title = new L.Control({'position':'bottomleft'});
-        title.onAdd = function (map) {
-            this._div = L.DomUtil.create('div', 'info');
-            this.update();
-            return this._div;
-        };
-        title.update = function () {
-            this._div.innerHTML = '<h2>Geoportal Miasto 15-Minutowe - Toruń (M. Rozmus)</h2>';
-        };
-        title.addTo(map);
         var zoomControl = L.control.zoom({
             position: 'topleft'
         }).addTo(map);
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
-        var measureControl = new L.Control.Measure({
-            position: 'topleft',
-            primaryLengthUnit: 'meters',
-            secondaryLengthUnit: 'kilometers',
-            primaryAreaUnit: 'sqmeters',
-            secondaryAreaUnit: 'hectares'
-        });
-        measureControl.addTo(map);
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0].innerHTML = '';
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0].className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
             if (bounds_group.getLayers().length) {
@@ -236,7 +214,7 @@
         });
         layer_PodkadOpenStreetMap_0;
         map.addLayer(layer_PodkadOpenStreetMap_0);
-        function pop_Indeks15minutowysiatka_1(feature, layer) {
+        function pop_siatka_analiza_15m_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -250,10 +228,10 @@
             layer.bindPopup(function() { return panel15m(feature.properties); }, { maxHeight: 460, minWidth: 255, className: 'popup15m' });
         }
 
-        function style_Indeks15minutowysiatka_1_0(feature) {
+        function style_siatka_analiza_15m_1_0(feature) {
             if (feature.properties['index_15m'] >= 0.000000 && feature.properties['index_15m'] <= 20.000000 ) {
                 return {
-                pane: 'pane_Indeks15minutowysiatka_1',
+                pane: 'pane_siatka_analiza_15m_1',
                 opacity: 1,
                 color: 'rgba(122,122,122,0.7)',
                 dashArray: '',
@@ -268,7 +246,7 @@
             }
             if (feature.properties['index_15m'] >= 20.000000 && feature.properties['index_15m'] <= 40.000000 ) {
                 return {
-                pane: 'pane_Indeks15minutowysiatka_1',
+                pane: 'pane_siatka_analiza_15m_1',
                 opacity: 1,
                 color: 'rgba(122,122,122,0.7)',
                 dashArray: '',
@@ -283,7 +261,7 @@
             }
             if (feature.properties['index_15m'] >= 40.000000 && feature.properties['index_15m'] <= 60.000000 ) {
                 return {
-                pane: 'pane_Indeks15minutowysiatka_1',
+                pane: 'pane_siatka_analiza_15m_1',
                 opacity: 1,
                 color: 'rgba(122,122,122,0.7)',
                 dashArray: '',
@@ -298,7 +276,7 @@
             }
             if (feature.properties['index_15m'] >= 60.000000 && feature.properties['index_15m'] <= 80.000000 ) {
                 return {
-                pane: 'pane_Indeks15minutowysiatka_1',
+                pane: 'pane_siatka_analiza_15m_1',
                 opacity: 1,
                 color: 'rgba(122,122,122,0.7)',
                 dashArray: '',
@@ -313,7 +291,7 @@
             }
             if (feature.properties['index_15m'] >= 80.000000 && feature.properties['index_15m'] <= 100.000000 ) {
                 return {
-                pane: 'pane_Indeks15minutowysiatka_1',
+                pane: 'pane_siatka_analiza_15m_1',
                 opacity: 1,
                 color: 'rgba(122,122,122,0.7)',
                 dashArray: '',
@@ -327,23 +305,23 @@
             }
             }
         }
-        map.createPane('pane_Indeks15minutowysiatka_1');
-        map.getPane('pane_Indeks15minutowysiatka_1').style.zIndex = 401;
-        map.getPane('pane_Indeks15minutowysiatka_1').style['mix-blend-mode'] = 'normal';
-        var renderer_siatka = L.canvas({pane: 'pane_Indeks15minutowysiatka_1', tolerance: 0});
-        var layer_Indeks15minutowysiatka_1 = new L.geoJson(json_Indeks15minutowysiatka_1, {
-            renderer: renderer_siatka,
+        map.createPane('pane_siatka_analiza_15m_1');
+        map.getPane('pane_siatka_analiza_15m_1').style.zIndex = 401;
+        map.getPane('pane_siatka_analiza_15m_1').style['mix-blend-mode'] = 'normal';
+        var renderer_siatka_analiza_15m_1 = L.canvas({pane: 'pane_siatka_analiza_15m_1', tolerance: 0});
+        var layer_siatka_analiza_15m_1 = new L.geoJson(json_siatka_analiza_15m_1, {
+            renderer: renderer_siatka_analiza_15m_1,
             attribution: '',
             interactive: true,
-            dataVar: 'json_Indeks15minutowysiatka_1',
-            layerName: 'layer_Indeks15minutowysiatka_1',
-            pane: 'pane_Indeks15minutowysiatka_1',
-            onEachFeature: pop_Indeks15minutowysiatka_1,
-            style: style_Indeks15minutowysiatka_1_0,
+            dataVar: 'json_siatka_analiza_15m_1',
+            layerName: 'layer_siatka_analiza_15m_1',
+            pane: 'pane_siatka_analiza_15m_1',
+            onEachFeature: pop_siatka_analiza_15m_1,
+            style: style_siatka_analiza_15m_1_0,
         });
-        bounds_group.addLayer(layer_Indeks15minutowysiatka_1);
-        map.addLayer(layer_Indeks15minutowysiatka_1);
-        function pop_Dzielnice_2(feature, layer) {
+        bounds_group.addLayer(layer_siatka_analiza_15m_1);
+        map.addLayer(layer_siatka_analiza_15m_1);
+        function pop_siatka_analiza_15m_post_inwestycja_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -356,7 +334,16 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>Dzielnica</strong><br />' + (feature.properties['nazwa_dzielnicy'] !== null ? autolinker.link(String(feature.properties['nazwa_dzielnicy']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <th scope="row">index_15m po</th>\
+                        <td>' + (feature.properties['index_15m'] !== null ? autolinker.link(String(feature.properties['index_15m']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">index_15m przed</th>\
+                        <td>' + (feature.properties['index_15m_przed'] !== null ? autolinker.link(String(feature.properties['index_15m_przed']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">delta_index_15m (p.p.)</th>\
+                        <td>' + (feature.properties['delta_index_15m'] !== null ? autolinker.link(String(feature.properties['delta_index_15m']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -366,34 +353,114 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Dzielnice_2_0() {
-            return {
-                pane: 'pane_Dzielnice_2',
+        function style_siatka_analiza_15m_post_inwestycja_2_0(feature) {
+            if (feature.properties['delta_index_15m'] >= -100.000000 && feature.properties['delta_index_15m'] <= -0.050000 ) {
+                return {
+                pane: 'pane_siatka_analiza_15m_post_inwestycja_2',
                 opacity: 1,
-                color: 'rgba(58,58,58,1.0)',
-                dashArray: '5.0,1.0',
+                color: 'rgba(154,154,154,0.8)',
+                dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1.0, 
-                fillOpacity: 0,
-                interactive: false,
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,48,39,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['delta_index_15m'] >= -0.050000 && feature.properties['delta_index_15m'] <= 0.050000 ) {
+                return {
+                pane: 'pane_siatka_analiza_15m_post_inwestycja_2',
+                opacity: 1,
+                color: 'rgba(154,154,154,0.8)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,0.28235294117647064)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['delta_index_15m'] >= 0.050000 && feature.properties['delta_index_15m'] <= 20.000000 ) {
+                return {
+                pane: 'pane_siatka_analiza_15m_post_inwestycja_2',
+                opacity: 1,
+                color: 'rgba(154,154,154,0.8)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,240,211,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['delta_index_15m'] >= 20.000000 && feature.properties['delta_index_15m'] <= 40.000000 ) {
+                return {
+                pane: 'pane_siatka_analiza_15m_post_inwestycja_2',
+                opacity: 1,
+                color: 'rgba(154,154,154,0.8)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(166,219,160,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['delta_index_15m'] >= 40.000000 && feature.properties['delta_index_15m'] <= 60.000000 ) {
+                return {
+                pane: 'pane_siatka_analiza_15m_post_inwestycja_2',
+                opacity: 1,
+                color: 'rgba(154,154,154,0.8)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(90,174,97,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['delta_index_15m'] >= 60.000000 && feature.properties['delta_index_15m'] <= 100.000000 ) {
+                return {
+                pane: 'pane_siatka_analiza_15m_post_inwestycja_2',
+                opacity: 1,
+                color: 'rgba(154,154,154,0.8)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(27,120,55,0.8)',
+                interactive: true,
+            }
             }
         }
-        map.createPane('pane_Dzielnice_2');
-        map.getPane('pane_Dzielnice_2').style.zIndex = 402;
-        map.getPane('pane_Dzielnice_2').style['mix-blend-mode'] = 'normal';
-        var layer_Dzielnice_2 = new L.geoJson(json_Dzielnice_2, {
+        map.createPane('pane_siatka_analiza_15m_post_inwestycja_2');
+        map.getPane('pane_siatka_analiza_15m_post_inwestycja_2').style.zIndex = 402;
+        map.getPane('pane_siatka_analiza_15m_post_inwestycja_2').style['mix-blend-mode'] = 'normal';
+        var renderer_siatka_analiza_15m_post_inwestycja_2 = L.canvas({pane: 'pane_siatka_analiza_15m_post_inwestycja_2', tolerance: 0});
+        var layer_siatka_analiza_15m_post_inwestycja_2 = new L.geoJson(json_siatka_analiza_15m_post_inwestycja_2, {
+            renderer: renderer_siatka_analiza_15m_post_inwestycja_2,
             attribution: '',
-            interactive: false,
-            dataVar: 'json_Dzielnice_2',
-            layerName: 'layer_Dzielnice_2',
-            pane: 'pane_Dzielnice_2',
-            onEachFeature: pop_Dzielnice_2,
-            style: style_Dzielnice_2_0,
+            interactive: true,
+            dataVar: 'json_siatka_analiza_15m_post_inwestycja_2',
+            layerName: 'layer_siatka_analiza_15m_post_inwestycja_2',
+            pane: 'pane_siatka_analiza_15m_post_inwestycja_2',
+            onEachFeature: pop_siatka_analiza_15m_post_inwestycja_2,
+            style: style_siatka_analiza_15m_post_inwestycja_2_0,
         });
-        bounds_group.addLayer(layer_Dzielnice_2);
-        map.addLayer(layer_Dzielnice_2);
-        function pop_Granicamiasta_3(feature, layer) {
+        bounds_group.addLayer(layer_siatka_analiza_15m_post_inwestycja_2);
+        function pop_izochrony_edukacja_3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -413,9 +480,140 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Granicamiasta_3_0() {
+        function style_izochrony_edukacja_3_0(feature) {
+            switch(String(feature.properties['czas_min'])) {
+                case '15':
+                    return {
+                pane: 'pane_izochrony_edukacja_3',
+                opacity: 1,
+                color: 'rgba(8,48,107,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(198,219,239,0.6)',
+                interactive: false,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_izochrony_edukacja_3',
+                opacity: 1,
+                color: 'rgba(8,48,107,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,174,214,0.6)',
+                interactive: false,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_izochrony_edukacja_3',
+                opacity: 1,
+                color: 'rgba(8,48,107,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(33,113,181,0.6)',
+                interactive: false,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_izochrony_edukacja_3');
+        map.getPane('pane_izochrony_edukacja_3').style.zIndex = 403;
+        map.getPane('pane_izochrony_edukacja_3').style['mix-blend-mode'] = 'normal';
+        var layer_izochrony_edukacja_3 = new L.geoJson(json_izochrony_edukacja_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_izochrony_edukacja_3',
+            layerName: 'layer_izochrony_edukacja_3',
+            pane: 'pane_izochrony_edukacja_3',
+            onEachFeature: pop_izochrony_edukacja_3,
+            style: style_izochrony_edukacja_3_0,
+        });
+        bounds_group.addLayer(layer_izochrony_edukacja_3);
+        function pop_pustynie_uslugowe_kde_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (var i in e.target._eventParents) {
+                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
+                            e.target._eventParents[i].resetStyle(e.target);
+                        }
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_pustynie_uslugowe_kde_4_0() {
             return {
-                pane: 'pane_Granicamiasta_3',
+                pane: 'pane_pustynie_uslugowe_kde_4',
+                opacity: 1,
+                color: 'rgba(74,20,134,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(20,134,85,0.2901960784313726)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_pustynie_uslugowe_kde_4');
+        map.getPane('pane_pustynie_uslugowe_kde_4').style.zIndex = 404;
+        map.getPane('pane_pustynie_uslugowe_kde_4').style['mix-blend-mode'] = 'normal';
+        var layer_pustynie_uslugowe_kde_4 = new L.geoJson(json_pustynie_uslugowe_kde_4, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_pustynie_uslugowe_kde_4',
+            layerName: 'layer_pustynie_uslugowe_kde_4',
+            pane: 'pane_pustynie_uslugowe_kde_4',
+            onEachFeature: pop_pustynie_uslugowe_kde_4,
+            style: style_pustynie_uslugowe_kde_4_0,
+        });
+        bounds_group.addLayer(layer_pustynie_uslugowe_kde_4);
+        map.addLayer(layer_pustynie_uslugowe_kde_4);
+        function pop_granica_miasta_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (var i in e.target._eventParents) {
+                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
+                            e.target._eventParents[i].resetStyle(e.target);
+                        }
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_granica_miasta_5_0() {
+            return {
+                pane: 'pane_granica_miasta_5',
                 opacity: 1,
                 color: 'rgba(27,27,27,1.0)',
                 dashArray: '',
@@ -426,21 +624,21 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_Granicamiasta_3');
-        map.getPane('pane_Granicamiasta_3').style.zIndex = 403;
-        map.getPane('pane_Granicamiasta_3').style['mix-blend-mode'] = 'normal';
-        var layer_Granicamiasta_3 = new L.geoJson(json_Granicamiasta_3, {
+        map.createPane('pane_granica_miasta_5');
+        map.getPane('pane_granica_miasta_5').style.zIndex = 405;
+        map.getPane('pane_granica_miasta_5').style['mix-blend-mode'] = 'normal';
+        var layer_granica_miasta_5 = new L.geoJson(json_granica_miasta_5, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Granicamiasta_3',
-            layerName: 'layer_Granicamiasta_3',
-            pane: 'pane_Granicamiasta_3',
-            onEachFeature: pop_Granicamiasta_3,
-            style: style_Granicamiasta_3_0,
+            dataVar: 'json_granica_miasta_5',
+            layerName: 'layer_granica_miasta_5',
+            pane: 'pane_granica_miasta_5',
+            onEachFeature: pop_granica_miasta_5,
+            style: style_granica_miasta_5_0,
         });
-        bounds_group.addLayer(layer_Granicamiasta_3);
-        map.addLayer(layer_Granicamiasta_3);
-        function pop_Zieleirekreacja_4(feature, layer) {
+        bounds_group.addLayer(layer_granica_miasta_5);
+        map.addLayer(layer_granica_miasta_5);
+        function pop_poi_skonsolidowane_6(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (var i in e.target._eventParents) {
@@ -471,357 +669,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Zieleirekreacja_4_0() {
-            return {
-                pane: 'pane_Zieleirekreacja_4',
-                radius: 7.0,
-                opacity: 1,
-                color: 'rgba(46,125,50,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,255,255,1.0)',
-                interactive: true,
-            }
-        }
-        function style_Zieleirekreacja_4_1() {
-            return {
-                pane: 'pane_Zieleirekreacja_4',
-        rotationAngle: 0.0,
-        rotationOrigin: 'center center',
-        icon: L.icon({
-            iconUrl: 'markers/Zieleirekreacja_4.svg',
-            iconSize: [10.639999999999999, 10.639999999999999]
-        }),
-                interactive: true,
-            }
-        }
-        map.createPane('pane_Zieleirekreacja_4');
-        map.getPane('pane_Zieleirekreacja_4').style.zIndex = 404;
-        map.getPane('pane_Zieleirekreacja_4').style['mix-blend-mode'] = 'normal';
-        var layer_Zieleirekreacja_4 = new L.geoJson.multiStyle(json_Zieleirekreacja_4, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Zieleirekreacja_4',
-            layerName: 'layer_Zieleirekreacja_4',
-            pane: 'pane_Zieleirekreacja_4',
-            onEachFeature: pop_Zieleirekreacja_4,
-            pointToLayers: [function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_Zieleirekreacja_4_0(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.marker(latlng, style_Zieleirekreacja_4_1(feature));
-            },
-        ]});
-        var cluster_Zieleirekreacja_4 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-            spiderfyDistanceMultiplier: 2});
-        cluster_Zieleirekreacja_4.addLayer(layer_Zieleirekreacja_4);
-
-        bounds_group.addLayer(layer_Zieleirekreacja_4);
-        cluster_Zieleirekreacja_4.addTo(map);
-        function pop_Transportpubliczny_5(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td class="visible-with-data" id="name" colspan="2"><strong>Nazwa</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(String(feature.properties['name']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Kategoria</th>\
-                        <td>' + (feature.properties['kategoria'] !== null ? autolinker.link(String(feature.properties['kategoria']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Dzielnica</th>\
-                        <td class="visible-with-data" id="nazwa_dzielnicy">' + (feature.properties['nazwa_dzielnicy'] !== null ? autolinker.link(String(feature.properties['nazwa_dzielnicy']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_Transportpubliczny_5_0() {
-            return {
-                pane: 'pane_Transportpubliczny_5',
-                radius: 7.0,
-                opacity: 1,
-                color: 'rgba(55,71,79,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,255,255,1.0)',
-                interactive: true,
-            }
-        }
-        function style_Transportpubliczny_5_1() {
-            return {
-                pane: 'pane_Transportpubliczny_5',
-        rotationAngle: 0.0,
-        rotationOrigin: 'center center',
-        icon: L.icon({
-            iconUrl: 'markers/Transportpubliczny_5.svg',
-            iconSize: [10.639999999999999, 10.639999999999999]
-        }),
-                interactive: true,
-            }
-        }
-        map.createPane('pane_Transportpubliczny_5');
-        map.getPane('pane_Transportpubliczny_5').style.zIndex = 405;
-        map.getPane('pane_Transportpubliczny_5').style['mix-blend-mode'] = 'normal';
-        var layer_Transportpubliczny_5 = new L.geoJson.multiStyle(json_Transportpubliczny_5, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Transportpubliczny_5',
-            layerName: 'layer_Transportpubliczny_5',
-            pane: 'pane_Transportpubliczny_5',
-            onEachFeature: pop_Transportpubliczny_5,
-            pointToLayers: [function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_Transportpubliczny_5_0(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.marker(latlng, style_Transportpubliczny_5_1(feature));
-            },
-        ]});
-        var cluster_Transportpubliczny_5 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-            spiderfyDistanceMultiplier: 2});
-        cluster_Transportpubliczny_5.addLayer(layer_Transportpubliczny_5);
-
-        bounds_group.addLayer(layer_Transportpubliczny_5);
-        cluster_Transportpubliczny_5.addTo(map);
-        function pop_Handel_6(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td class="visible-with-data" id="name" colspan="2"><strong>Nazwa</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(String(feature.properties['name']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Kategoria</th>\
-                        <td>' + (feature.properties['kategoria'] !== null ? autolinker.link(String(feature.properties['kategoria']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Dzielnica</th>\
-                        <td class="visible-with-data" id="nazwa_dzielnicy">' + (feature.properties['nazwa_dzielnicy'] !== null ? autolinker.link(String(feature.properties['nazwa_dzielnicy']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_Handel_6_0() {
-            return {
-                pane: 'pane_Handel_6',
-                radius: 7.0,
-                opacity: 1,
-                color: 'rgba(123,63,160,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,255,255,1.0)',
-                interactive: true,
-            }
-        }
-        function style_Handel_6_1() {
-            return {
-                pane: 'pane_Handel_6',
-        rotationAngle: 0.0,
-        rotationOrigin: 'center center',
-        icon: L.icon({
-            iconUrl: 'markers/Handel_6.svg',
-            iconSize: [10.639999999999999, 10.639999999999999]
-        }),
-                interactive: true,
-            }
-        }
-        map.createPane('pane_Handel_6');
-        map.getPane('pane_Handel_6').style.zIndex = 406;
-        map.getPane('pane_Handel_6').style['mix-blend-mode'] = 'normal';
-        var layer_Handel_6 = new L.geoJson.multiStyle(json_Handel_6, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Handel_6',
-            layerName: 'layer_Handel_6',
-            pane: 'pane_Handel_6',
-            onEachFeature: pop_Handel_6,
-            pointToLayers: [function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_Handel_6_0(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.marker(latlng, style_Handel_6_1(feature));
-            },
-        ]});
-        bounds_group.addLayer(layer_Handel_6);
-        map.addLayer(layer_Handel_6);
-        function pop_Zdrowie_7(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td class="visible-with-data" id="name" colspan="2"><strong>Nazwa</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(String(feature.properties['name']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Kategoria</th>\
-                        <td>' + (feature.properties['kategoria'] !== null ? autolinker.link(String(feature.properties['kategoria']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Dzielnica</th>\
-                        <td class="visible-with-data" id="nazwa_dzielnicy">' + (feature.properties['nazwa_dzielnicy'] !== null ? autolinker.link(String(feature.properties['nazwa_dzielnicy']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_Zdrowie_7_0() {
-            return {
-                pane: 'pane_Zdrowie_7',
-                radius: 7.0,
-                opacity: 1,
-                color: 'rgba(192,57,43,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,255,255,1.0)',
-                interactive: true,
-            }
-        }
-        function style_Zdrowie_7_1() {
-            return {
-                pane: 'pane_Zdrowie_7',
-        rotationAngle: 0.0,
-        rotationOrigin: 'center center',
-        icon: L.icon({
-            iconUrl: 'markers/Zdrowie_7.svg',
-            iconSize: [10.639999999999999, 10.639999999999999]
-        }),
-                interactive: true,
-            }
-        }
-        map.createPane('pane_Zdrowie_7');
-        map.getPane('pane_Zdrowie_7').style.zIndex = 407;
-        map.getPane('pane_Zdrowie_7').style['mix-blend-mode'] = 'normal';
-        var layer_Zdrowie_7 = new L.geoJson.multiStyle(json_Zdrowie_7, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Zdrowie_7',
-            layerName: 'layer_Zdrowie_7',
-            pane: 'pane_Zdrowie_7',
-            onEachFeature: pop_Zdrowie_7,
-            pointToLayers: [function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_Zdrowie_7_0(feature));
-            },function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.marker(latlng, style_Zdrowie_7_1(feature));
-            },
-        ]});
-        bounds_group.addLayer(layer_Zdrowie_7);
-        map.addLayer(layer_Zdrowie_7);
-        function pop_Edukacja_8(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td class="visible-with-data" id="name" colspan="2"><strong>Nazwa</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(String(feature.properties['name']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Kategoria</th>\
-                        <td>' + (feature.properties['kategoria'] !== null ? autolinker.link(String(feature.properties['kategoria']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Dzielnica</th>\
-                        <td class="visible-with-data" id="nazwa_dzielnicy">' + (feature.properties['nazwa_dzielnicy'] !== null ? autolinker.link(String(feature.properties['nazwa_dzielnicy']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_Edukacja_8_0() {
-            return {
-                pane: 'pane_Edukacja_8',
+        function style_poi_skonsolidowane_6_0(feature) {
+            switch(String(feature.properties['kategoria'])) {
+                case 'edukacja':
+                    return {
+                pane: 'pane_poi_skonsolidowane_6',
                 radius: 7.0,
                 opacity: 1,
                 color: 'rgba(31,95,168,1.0)',
@@ -834,54 +686,234 @@
                 fillColor: 'rgba(255,255,255,1.0)',
                 interactive: true,
             }
+                    break;
+                case 'zdrowie':
+                    return {
+                pane: 'pane_poi_skonsolidowane_6',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(192,57,43,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'handel':
+                    return {
+                pane: 'pane_poi_skonsolidowane_6',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(123,63,160,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'zielen':
+                    return {
+                pane: 'pane_poi_skonsolidowane_6',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(46,125,50,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'transport':
+                    return {
+                pane: 'pane_poi_skonsolidowane_6',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(55,71,79,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
         }
-        function style_Edukacja_8_1() {
-            return {
-                pane: 'pane_Edukacja_8',
+        function style_poi_skonsolidowane_6_1(feature) {
+            switch(String(feature.properties['kategoria'])) {
+                case 'edukacja':
+                    return {
+                pane: 'pane_poi_skonsolidowane_6',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/Edukacja_8.svg',
+            iconUrl: 'markers/poi_edukacja.svg',
             iconSize: [10.639999999999999, 10.639999999999999]
         }),
                 interactive: true,
             }
+                    break;
+                case 'zdrowie':
+                    return {
+                pane: 'pane_poi_skonsolidowane_6',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/poi_zdrowie.svg',
+            iconSize: [10.639999999999999, 10.639999999999999]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'handel':
+                    return {
+                pane: 'pane_poi_skonsolidowane_6',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/poi_handel.svg',
+            iconSize: [10.639999999999999, 10.639999999999999]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'zielen':
+                    return {
+                pane: 'pane_poi_skonsolidowane_6',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/poi_zielen.svg',
+            iconSize: [10.639999999999999, 10.639999999999999]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'transport':
+                    return {
+                pane: 'pane_poi_skonsolidowane_6',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/poi_transport.svg',
+            iconSize: [10.639999999999999, 10.639999999999999]
+        }),
+                interactive: true,
+            }
+                    break;
+            }
         }
-        map.createPane('pane_Edukacja_8');
-        map.getPane('pane_Edukacja_8').style.zIndex = 408;
-        map.getPane('pane_Edukacja_8').style['mix-blend-mode'] = 'normal';
-        var layer_Edukacja_8 = new L.geoJson.multiStyle(json_Edukacja_8, {
+        map.createPane('pane_poi_skonsolidowane_6');
+        map.getPane('pane_poi_skonsolidowane_6').style.zIndex = 406;
+        map.getPane('pane_poi_skonsolidowane_6').style['mix-blend-mode'] = 'normal';
+        var layer_poi_skonsolidowane_6 = new L.geoJson.multiStyle(json_poi_skonsolidowane_6, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Edukacja_8',
-            layerName: 'layer_Edukacja_8',
-            pane: 'pane_Edukacja_8',
-            onEachFeature: pop_Edukacja_8,
+            dataVar: 'json_poi_skonsolidowane_6',
+            layerName: 'layer_poi_skonsolidowane_6',
+            pane: 'pane_poi_skonsolidowane_6',
+            onEachFeature: pop_poi_skonsolidowane_6,
             pointToLayers: [function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Edukacja_8_0(feature));
+                return L.circleMarker(latlng, style_poi_skonsolidowane_6_0(feature));
             },function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_Edukacja_8_1(feature));
+                return L.marker(latlng, style_poi_skonsolidowane_6_1(feature));
             },
         ]});
-        bounds_group.addLayer(layer_Edukacja_8);
-        map.addLayer(layer_Edukacja_8);
+        var cluster_poi_skonsolidowane_6 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_poi_skonsolidowane_6.addLayer(layer_poi_skonsolidowane_6);
+
+        bounds_group.addLayer(layer_poi_skonsolidowane_6);
+        cluster_poi_skonsolidowane_6.addTo(map);
+        function pop_proponowane_nowe_poi_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (var i in e.target._eventParents) {
+                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
+                            e.target._eventParents[i].resetStyle(e.target);
+                        }
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Nazwa</strong><br />' + (feature.properties['name'] !== null ? autolinker.link(String(feature.properties['name']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_proponowane_nowe_poi_7_0() {
+            return {
+                pane: 'pane_proponowane_nowe_poi_7',
+                radius: 14.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,215,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_proponowane_nowe_poi_7');
+        map.getPane('pane_proponowane_nowe_poi_7').style.zIndex = 407;
+        map.getPane('pane_proponowane_nowe_poi_7').style['mix-blend-mode'] = 'normal';
+        var layer_proponowane_nowe_poi_7 = new L.geoJson(json_proponowane_nowe_poi_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_proponowane_nowe_poi_7',
+            layerName: 'layer_proponowane_nowe_poi_7',
+            pane: 'pane_proponowane_nowe_poi_7',
+            onEachFeature: pop_proponowane_nowe_poi_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_proponowane_nowe_poi_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_proponowane_nowe_poi_7);
+        map.addLayer(layer_proponowane_nowe_poi_7);
         var overlaysTree = [
-            {label: '<img src="legend/Edukacja_8.png" /> Edukacja', layer: layer_Edukacja_8},
-            {label: '<img src="legend/Zdrowie_7.png" /> Zdrowie', layer: layer_Zdrowie_7},
-            {label: '<img src="legend/Handel_6.png" /> Handel', layer: layer_Handel_6},
-            {label: '<img src="legend/Transportpubliczny_5.png" /> Transport publiczny', layer: cluster_Transportpubliczny_5},
-            {label: '<img src="legend/Zieleirekreacja_4.png" /> Zieleń i rekreacja', layer: cluster_Zieleirekreacja_4},
-            {label: '<img src="legend/Granicamiasta_3.png" /> Granica miasta', layer: layer_Granicamiasta_3},
-            {label: '<img src="legend/Dzielnice_2.png" /> Dzielnice', layer: layer_Dzielnice_2},
-            {label: '<b>Indeks dostępności 15-minutowej</b><br /><table><tr><td style="text-align: center;"><img src="legend/Indeks15minutowysiatka_1_KrytycznieniskadostepnoscPustyniausugowa0.png" /></td><td>Krytycznie niska dostępność (Pustynia usługowa)</td></tr><tr><td style="text-align: center;"><img src="legend/Indeks15minutowysiatka_1_Niskadostepnosc1.png" /></td><td>Niska dostępność</td></tr><tr><td style="text-align: center;"><img src="legend/Indeks15minutowysiatka_1_Sredniadostepnosc2.png" /></td><td>Średnia dostępność</td></tr><tr><td style="text-align: center;"><img src="legend/Indeks15minutowysiatka_1_Dobradostepnosc3.png" /></td><td>Dobra dostępność</td></tr><tr><td style="text-align: center;"><img src="legend/Indeks15minutowysiatka_1_WzorcoweMiasto15minutowe4.png" /></td><td>Wzorcowe Miasto 15-minutowe</td></tr></table>', layer: layer_Indeks15minutowysiatka_1},
+            {label: '<img src="legend/proponowane_nowe_poi_7.png" /> proponowane_nowe_poi', layer: layer_proponowane_nowe_poi_7},
+            {label: 'poi_skonsolidowane<br /><table><tr><td style="text-align: center;"><img src="legend/poi_skonsolidowane_6_Edukacja0.png" /></td><td>Edukacja</td></tr><tr><td style="text-align: center;"><img src="legend/poi_skonsolidowane_6_Zdrowie1.png" /></td><td>Zdrowie</td></tr><tr><td style="text-align: center;"><img src="legend/poi_skonsolidowane_6_Handel2.png" /></td><td>Handel</td></tr><tr><td style="text-align: center;"><img src="legend/poi_skonsolidowane_6_Zielenirekreacja3.png" /></td><td>Zieleń i rekreacja</td></tr><tr><td style="text-align: center;"><img src="legend/poi_skonsolidowane_6_Transportpubliczny4.png" /></td><td>Transport publiczny</td></tr></table>', layer: cluster_poi_skonsolidowane_6},
+            {label: '<img src="legend/granica_miasta_5.png" /> granica_miasta', layer: layer_granica_miasta_5},
+            {label: '<img src="legend/pustynie_uslugowe_kde_4.png" /> pustynie_uslugowe_kde', layer: layer_pustynie_uslugowe_kde_4},
+            {label: 'izochrony_edukacja<br /><table><tr><td style="text-align: center;"><img src="legend/izochrony_edukacja_3_15min0.png" /></td><td>15 min</td></tr><tr><td style="text-align: center;"><img src="legend/izochrony_edukacja_3_10min1.png" /></td><td>10 min</td></tr><tr><td style="text-align: center;"><img src="legend/izochrony_edukacja_3_5min2.png" /></td><td>5 min</td></tr></table>', layer: layer_izochrony_edukacja_3},
+            {label: 'siatka_analiza_15m_post_inwestycja<br /><table><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_post_inwestycja_2_Pogorszenie0.png" /></td><td>Pogorszenie</td></tr><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_post_inwestycja_2_Bezzmian1.png" /></td><td>Bez zmian</td></tr><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_post_inwestycja_2_01do20pp2.png" /></td><td>+0,1 do +20 p.p.</td></tr><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_post_inwestycja_2_20do40pp3.png" /></td><td>+20 do +40 p.p.</td></tr><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_post_inwestycja_2_40do60pp4.png" /></td><td>+40 do +60 p.p.</td></tr><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_post_inwestycja_2_powyzej60pp5.png" /></td><td>powyżej +60 p.p.</td></tr></table>', layer: layer_siatka_analiza_15m_post_inwestycja_2},
+            {label: 'siatka_analiza_15m<br /><table><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_1_KrytycznieniskadostepnoscPustyniausugowa0.png" /></td><td>Krytycznie niska dostępność (Pustynia usługowa)</td></tr><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_1_Niskadostepnosc1.png" /></td><td>Niska dostępność</td></tr><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_1_Sredniadostepnosc2.png" /></td><td>Średnia dostępność</td></tr><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_1_Dobradostepnosc3.png" /></td><td>Dobra dostępność</td></tr><tr><td style="text-align: center;"><img src="legend/siatka_analiza_15m_1_WzorcoweMiasto15minutowe4.png" /></td><td>Wzorcowe Miasto 15-minutowe</td></tr></table>', layer: layer_siatka_analiza_15m_1},
             {label: "Podkład OpenStreetMap", layer: layer_PodkadOpenStreetMap_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
@@ -945,12 +977,12 @@
         });       
         setBounds();
         var i = 0;
-        layer_Dzielnice_2.eachLayer(function(layer) {
+        layer_proponowane_nowe_poi_7.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['nazwa_dzielnicy'] !== null?String('<div style="color: #222222; font-size: 12pt; font-weight: bold; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['nazwa_dzielnicy']).replace(/\\n/g, '<br>') + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Dzielnice_2'});
+            layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 12pt; font-weight: bold; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['name']).replace(/\\n/g, '<br>') + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_proponowane_nowe_poi_7'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -958,7 +990,7 @@
               i++;
         });
         map.addControl(new L.Control.Search({
-            layer: layer_Edukacja_8,
+            layer: layer_poi_skonsolidowane_6,
             initial: false,
             hideMarkerOnCollapse: true,
             propertyName: 'name'}));
@@ -967,15 +999,15 @@
         } else {
             document.getElementsByClassName('search-button')[1].className += ' fa fa-binoculars';
         }
-        resetLabels([layer_Dzielnice_2]);
+        resetLabels([layer_proponowane_nowe_poi_7]);
         map.on("zoomend", function(){
-            resetLabels([layer_Dzielnice_2]);
+            resetLabels([layer_proponowane_nowe_poi_7]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_Dzielnice_2]);
+            resetLabels([layer_proponowane_nowe_poi_7]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_Dzielnice_2]);
+            resetLabels([layer_proponowane_nowe_poi_7]);
         });
         </script>        
     </body>
