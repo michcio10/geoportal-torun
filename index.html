@@ -102,6 +102,7 @@
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
+            if (typeof highlightLayer.setStyle !== 'function') { return; }
 
             if (e.target.feature.geometry.type === 'LineString' || e.target.feature.geometry.type === 'MultiLineString') {
               highlightLayer.setStyle({
@@ -109,9 +110,10 @@
               });
             } else {
               highlightLayer.setStyle({
-                fillColor: 'rgba(255, 255, 0, 1.00)',
-                fillOpacity: 1
+                color: 'rgba(255, 255, 0, 1.00)',
+                weight: 3
               });
+              if (highlightLayer.bringToFront) { highlightLayer.bringToFront(); }
             }
         }
         var map = L.map('map', {
