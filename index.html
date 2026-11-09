@@ -113,7 +113,6 @@
                 color: 'rgba(255, 255, 0, 1.00)',
                 weight: 3
               });
-              if (highlightLayer.bringToFront) { highlightLayer.bringToFront(); }
             }
         }
         var map = L.map('map', {
@@ -331,7 +330,9 @@
         map.createPane('pane_Indeks15minutowysiatka_1');
         map.getPane('pane_Indeks15minutowysiatka_1').style.zIndex = 401;
         map.getPane('pane_Indeks15minutowysiatka_1').style['mix-blend-mode'] = 'normal';
+        var renderer_siatka = L.canvas({pane: 'pane_Indeks15minutowysiatka_1', tolerance: 0});
         var layer_Indeks15minutowysiatka_1 = new L.geoJson(json_Indeks15minutowysiatka_1, {
+            renderer: renderer_siatka,
             attribution: '',
             interactive: true,
             dataVar: 'json_Indeks15minutowysiatka_1',
@@ -375,7 +376,7 @@
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fillOpacity: 0,
-                interactive: true,
+                interactive: false,
             }
         }
         map.createPane('pane_Dzielnice_2');
@@ -383,7 +384,7 @@
         map.getPane('pane_Dzielnice_2').style['mix-blend-mode'] = 'normal';
         var layer_Dzielnice_2 = new L.geoJson(json_Dzielnice_2, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_Dzielnice_2',
             layerName: 'layer_Dzielnice_2',
             pane: 'pane_Dzielnice_2',
@@ -422,7 +423,7 @@
                 lineJoin: 'miter',
                 weight: 3.0, 
                 fillOpacity: 0,
-                interactive: true,
+                interactive: false,
             }
         }
         map.createPane('pane_Granicamiasta_3');
@@ -430,7 +431,7 @@
         map.getPane('pane_Granicamiasta_3').style['mix-blend-mode'] = 'normal';
         var layer_Granicamiasta_3 = new L.geoJson(json_Granicamiasta_3, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_Granicamiasta_3',
             layerName: 'layer_Granicamiasta_3',
             pane: 'pane_Granicamiasta_3',
